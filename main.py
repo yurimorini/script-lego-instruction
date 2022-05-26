@@ -188,18 +188,28 @@ class Storage:
     def get_media_folder(self):
         return self._media_folder
 
+    def save(self, data: str): 
+        with open(self.get_file(), 'w') as outfile:
+            outfile.write(data)
+
+
+def parse_options():
+    """Parses command line options"""
+
+    import argparse
+
+    parser = argparse.ArgumentParser(description='Generates instruction metadata from files.')
+    parser.add_argument('path', help="Source directory for PDF files")
+    parser.add_argument('--output', dest="output", default="lego.json", help="JSON output file")
+
+    return parser.parse_args()
+
 
 def main():
     """Command management"""
 
-    import argparse
-    import os
-
     # Parsing options
-    parser = argparse.ArgumentParser(description='Generates instruction metadata from files.')
-    parser.add_argument('path', help="Source directory for PDF files")
-    parser.add_argument('--output', dest="output", default="lego.json", help="JSON output file")
-    args = parser.parse_args()
+    args = parse_options()
 
     # Services
     storage = Storage(args.output)
@@ -218,8 +228,7 @@ def main():
     json_string = json.dumps(instruction, default=vars, indent=2);
     
     # Save file
-    with open(storage.get_file(), 'w') as outfile:
-        outfile.write(json_string)
+    storage.save(json_string)
 
 if __name__ == "__main__":
     main()
