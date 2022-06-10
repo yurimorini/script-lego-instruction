@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <link rel="preload" href="index.js" as="js" />
+  <link rel="preload" href="style.css" as="css" />
+
+  <script async type="module" src="modules/search.js"></script>
+  <script async type="module" src="modules/grid.js"></script>
+  <script async type="module" src="index.js" nosniff></script>
+  <link rel="stylesheet" href="style.css" crossorigin="anonymous" />
+</html>
+<body>
+  <header class="header">
+    <div class="logo">
+      <span class="logo__item">Morini's Lego</span>
+    </div>
+    <ym-lego-search id="search"></ym-lego-search>
+  </header>
+  <main class="content">
+    <ym-lego-list id="grid"></ym-lego-list>
+  </div>
+</body>
