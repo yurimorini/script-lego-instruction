@@ -1,14 +1,26 @@
 import { DataLoader } from './modules/data-loader.js';
-import { Store } from './modules/instruction.js';
+import { Instructions } from './modules/instruction.js';
+import { AppState } from './modules/app-state.js';
 
+const { state, subscribe } = AppState();
 const data = await DataLoader("lego.json").load();
-const store = Store(data);
-
+const instructions = Instructions(data);
 
 const s = document.querySelector("#search");
 const g = document.querySelector("#grid");
 
-g.list = store.all();
+state.list = instructions.all();
 
-s.addEventListener('search', (e) => {console.log(e.detail)}, false);
+s.addEventListener('query', (e) => {
+  state.searchText = e.detail.query;
+}, false);
+
+subscribe('filtered', (e) => {
+  g.list = e.detail.filtered;
+})
+
+
+
+
+
 

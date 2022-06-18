@@ -15,8 +15,8 @@ define('ym-lego-list', {
       ${this.list.map((item) => { return html`
         <li class="grid__item">
           <figure class="grid-item" data-family="${item.family}">
-            <a class="grid-item__link" href="">
-              
+            <a class="grid-item__link" data-path="${item.path}">
+            
               <img 
                 class="grid-item__thumb" 
                 src="${this.prefix + item.image}" 
@@ -26,7 +26,6 @@ define('ym-lego-list', {
                 <span class="grid-item__code">${item.code}</span>
                 <span class="grid-item__name">${item.name}</span> 
               </figcaption>
-            
             </a>
           </figure>
         </li>

@@ -85,7 +85,7 @@ body, html {
   font-size: 1.2rem;
   border: none;
   cursor: pointer;
-  padding: .2rem .8rem;
+  /*padding: .2rem .8rem;*/
   border-radius: 2rem;
   transform: translateX(-100%);
   background-color: transparent;
@@ -94,6 +94,8 @@ body, html {
   transform: translateY(-50%);
   top: 50%;
   transition: background-color .2s;
+  width: 25px;
+  text-align: center;
 }
 
 .search__button:hover {
