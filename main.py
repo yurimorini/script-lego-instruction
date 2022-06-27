@@ -135,7 +135,7 @@ class ImagesGenerator:
                 "-strip", 
                 "-flatten",
                 "-quality", "100%", 
-                "-alpha", "off",
+                "-alpha", "remove",
                 "-background", "white", 
                 f"{file}[0]", f"{output}" 
             ], text=True, check=True)

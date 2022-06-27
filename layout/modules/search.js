@@ -16,8 +16,24 @@ define('ym-lego-search', {
     'clear', 'input', 'keydown'
   ],
 
+  init() {
+    this.form = {};
+    this.inputField = {};
+    this.render()
+  },
+
   connected() {
-    this.form = this.querySelector('form');
+    document.addEventListener('keydown', (event) => {
+      if (!event.ctrlKey) { return; }
+      switch (event.key) {
+        case 'f' :
+          event.preventDefault();
+          event.stopPropagation();
+          this.inputField.current.focus(); 
+          return false;
+          break;
+      }
+    });
   },
 
   input(e) {
@@ -33,7 +49,7 @@ define('ym-lego-search', {
   clear(e) {
     e.preventDefault();
     
-    this.form.reset();
+    this.form.current.reset();
     this.query = "";
     
     this.dispatchEvent(new CustomEvent('query', { 
@@ -52,9 +68,10 @@ define('ym-lego-search', {
 
   render() {
     this.html`
-      <form class="search">
+      <form class="search" ref=${this.form}>
 
         <input 
+          ref=${this.inputField}
           onkeydown="${this.keydown}"
           class="search__input"
           oninput=${this.input} 
