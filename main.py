@@ -52,10 +52,11 @@ class Instruction:
         self.fileName = PurePath(path).name
         self.name = PurePath(self.fileName).stem
         parts = self.name.split(" - ")
+        length = len(parts)
         self.code = parts[0] 
-        self.family = parts[1]
-        self.title = "".join(parts[2:])
         self.media = [str(i) for i in media]
+        self.family = "" if length == 2 else parts[1]
+        self.title = "".join(parts[2:]) if length > 2 else parts[1]
 
     def __str__(self):
         return "Title:\"{0}\", Code:\"{1}\", File:\"{2}\"".format(
