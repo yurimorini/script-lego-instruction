@@ -36,5 +36,3 @@ export const DataLoader = (path) => {
     }
   }
 }
-
-window.SARCAZZO = "ciao";
