@@ -152,7 +152,7 @@ class ImagesGenerator:
 
     # Check the converter software is available in shell
     def converter_exists(self):
-        result = subprocess.Popen("convert", shell = True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        result = subprocess.Popen("convert -help", shell = True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         text = result.communicate()[0]
         return result.returncode == 0
 
