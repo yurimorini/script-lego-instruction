@@ -7,6 +7,7 @@ import os
 import subprocess
 import sys
 from pathlib import PurePath, Path
+import re
 
 class Instruction:
     """LEGO instruction file reference.
@@ -84,13 +85,17 @@ class InstructionGenerator:
     def __init__(self, source:str, images):
         self._source = source
         self._images_generator = images
-        self._iterator = Path(self._source).glob('*.pdf')
+        self._iterator = self._sorted(Path(self._source).glob('*.pdf'))
 
     def __iter__(self):
         for path in self._iterator:
             file = str(path)
             media = self._images_generator.create_media(file)
             yield Instruction(file, media)
+
+    def _sorted(self, file_list):
+        nat_sort = lambda s: [int(t) if t.isdigit() else t.lower() for t in re.split('(\d+)', str(s))]
+        return sorted(file_list, key=nat_sort)
 
 
 class ImagesGenerator:
